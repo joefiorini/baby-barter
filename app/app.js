@@ -1,5 +1,7 @@
 import Resolver from 'resolver';
 
+Ember.ENV.MODEL_FACTORY_INJECTIONS = true;
+
 var App = Ember.Application.create({
   LOG_ACTIVE_GENERATION: true,
   LOG_VIEW_LOOKUPS: true,
