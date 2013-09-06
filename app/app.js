@@ -9,6 +9,10 @@ var App = Ember.Application.create({
   Resolver: Resolver
 });
 
+DS.RESTAdapter.reopen({
+  host: 'http://localhost:3000'
+});
+
 import routes from 'appkit/routes';
 App.Router.map(routes); // TODO: just resolve the router
 
