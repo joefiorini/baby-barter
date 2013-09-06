@@ -10,7 +10,7 @@ var App = Ember.Application.create({
 });
 
 DS.RESTAdapter.reopen({
-  host: 'http://localhost:3000'
+  host: 'https://densitypop.ngrok.com'
 });
 
 import routes from 'appkit/routes';
