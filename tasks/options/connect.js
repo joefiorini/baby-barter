@@ -1,4 +1,5 @@
 var lockFile = require('lockfile'),
+    fortune = require('../../server/site'),
     fs = require('fs'),
     url = require('url');
 
@@ -12,6 +13,15 @@ module.exports = {
       // page than index.html on any url not matching an asset.
       //   wildcard: 'not_index.html'
       middleware: middleware
+    }
+  },
+  api: {
+    options: {
+      port: process.env.API_PORT || 3000,
+      hostname: '0.0.0.0',
+      middleware: function() {
+        return [fortune.router]
+      }
     }
   },
   dist: {
