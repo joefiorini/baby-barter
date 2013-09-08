@@ -1,4 +1,5 @@
 import Resolver from 'resolver';
+import Adapter from 'appkit/adapter';
 
 Ember.ENV.MODEL_FACTORY_INJECTIONS = true;
 
@@ -9,9 +10,11 @@ var App = Ember.Application.create({
   Resolver: Resolver
 });
 
-DS.RESTAdapter.reopen({
-  host: 'https://densitypop.ngrok.com'
+Adapter.reopen({
+  host: 'http://ember-dev-27896.use1.actionbox.io:3000'
 });
+
+App.ApplicationAdapter = Adapter;
 
 import routes from 'appkit/routes';
 App.Router.map(routes); // TODO: just resolve the router
