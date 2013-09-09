@@ -1,0 +1,11 @@
+label, input {
+  display: block;
+}
+
+label > input {
+  margin-top: .5em;
+}
+
+label+label, label+button {
+  margin-top: 1em;
+}
