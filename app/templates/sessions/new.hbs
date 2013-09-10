@@ -1,0 +1,30 @@
+<form {{action "signIn" on="submit"}}>
+
+<h3>Sign In</h3>
+
+{{#if hasServerError}}
+<p class="error">
+  Oh no!  I&apos;m having trouble validating you right now. Can you please try again later?
+</p>
+{{/if}}
+
+{{#if hasAccessDenied}}
+<p class="error">
+  Oh my, it seems you&apos;ve entered an invalid email or password. Want to try that again?
+</p>
+{{/if}}
+
+<label>
+  Email
+  {{input type="text" value=email name="email" placeholder="test@example.com"}}
+</label>
+
+<label>
+  Password
+  {{input type="password" value=password}}
+</label>
+
+{{#ladda-button style="zoom-in" color="blue" size="s" action="signIn"}}Sign in{{/ladda-button}}
+
+</form>
+
