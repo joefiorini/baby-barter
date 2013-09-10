@@ -1,3 +1,5 @@
+<form {{action "signUp" on="submit"}}>
+
 <h3>Sign up your family</h3>
 <label>
   Email
@@ -5,8 +7,9 @@
 </label>
 
 <label>
-  Display Name
+  Family Display Name
   {{input type="text" value=display_name name="display_name" placeholder="John & Jane Smith"}}
+  <p class="note">This will help your friends and relatives find you later</p>
 </label>
 
 <label>
@@ -14,4 +17,6 @@
   {{input type="password" value=password}}
 </label>
 
-<button {{action "signUp"}}>Sign up</button>
+{{#ladda-button style="zoom-in" color="blue" size="s" action="signUp"}}Sign up{{/ladda-button}}
+
+</form>

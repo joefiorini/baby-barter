@@ -7,6 +7,7 @@
     "jquery": "~1.9.1",
     "qunit": "~1.12.0",
     "ember-data": "http://builds.emberjs.com/latest/ember-data.js",
-    "normalize-css": "~2.1.3"
+    "normalize-css": "~2.1.3",
+    "Ladda": "~0.8.0"
   }
 }
