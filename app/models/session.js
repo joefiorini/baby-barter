@@ -9,24 +9,27 @@ var Session = Ember.Object.extend({
   },
   save: function() {
     var self = this;
-    var adapter = App.__container__.lookup("adapter:_rest");
+    var adapter = this.get("container").lookup("store:main").adapterForType("family")
     return new Ember.RSVP.Promise(function(resolve, reject) {
       var xhr = $.ajax({
-        url: "http://ember-dev-27896.use1.actionbox.io:3000/sessions",
+        url: adapter.host + "/sessions",
         type: "POST",
         contentType: "application/json",
         data: JSON.stringify(self)
       });
       xhr.then(function(token) {
+        adapter.headers = adapter.headers || {};
+        adapter.headers["X-Authorization"] = token;
+        adapter.headers["X-SignedInAs"] = self.get("email");
         self.set("token", token);
-        self.cacheToken();
+        self.cacheCredentials();
         resolve(self);
       }, reject);
     });
   },
-  cacheToken: function() {
-    var token = this.get("token");
-    window.localStorage.setItem("session-token", token);
+  cacheCredentials: function() {
+    var obj = this.getProperties("email", "token");
+    window.localStorage.setItem("session", JSON.stringify(obj));
   }
 });
 

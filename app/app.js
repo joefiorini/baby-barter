@@ -1,5 +1,6 @@
 import Resolver from 'resolver';
 import Adapter from 'appkit/adapter';
+import SessionInit from 'appkit/initializers/session';
 
 Ember.ENV.MODEL_FACTORY_INJECTIONS = true;
 
@@ -20,5 +21,8 @@ import routes from 'appkit/routes';
 App.Router.map(routes); // TODO: just resolve the router
 
 App.Router.reopen({ location: 'history' });
+
+
+App.initializer(SessionInit);
 
 export default App;
