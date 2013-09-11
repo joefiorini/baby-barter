@@ -1,4 +1,5 @@
 var NewController = Ember.ObjectController.extend({
+  flash: Ember.Object.create(),
   hasServerError: function() {
     console.log("serverError?", this.get("errorCode"));
     if(this.get("errorCode") >= 500) {

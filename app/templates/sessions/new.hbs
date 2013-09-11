@@ -1,3 +1,9 @@
+{{#if flash.denied}}
+<p class="flash-message--error">
+  Oh my, you went to a page without being signed in. I need you to go ahead and sign in now please.
+</p>
+{{/if}}
+
 <form {{action "signIn" on="submit"}}>
 
 <h3>Sign In</h3>
