@@ -25,6 +25,13 @@ resource("family", {
   tokens: ['token']
 }).transform(auth.before, auth.after).
 
+resource("sitting", {
+  started_at: Date,
+  ended_at: Date,
+  requested_by: 'family',
+  performed_by: 'family'
+}).
+
 resource("token", {
   owner: 'family',
   value: String

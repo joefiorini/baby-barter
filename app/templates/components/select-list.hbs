@@ -1,0 +1,5 @@
+<select>
+  {{#each item in collection}}
+  <option {{bind-attr id="item.id"}}>{{item.displayName}}</option>
+  {{/each}}
+</select>

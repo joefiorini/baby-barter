@@ -1,0 +1,23 @@
+<h2>Add a Swap</h2>
+
+<label>
+  Requested By
+{{view Ember.Select contentBinding="families"
+       optionValuePath="content.id"
+       optionLabelPath="content.displayName"}}
+</label>
+
+<label>
+  Performed on
+  {{date-picker value=performedOn}}
+</label>
+
+<label>
+  Started At
+  {{time-picker value=startedAtTime}}
+</label>
+
+<label>
+  Finished At
+  {{time-picker value=finishedAtTime}}
+</label>
