@@ -17,6 +17,10 @@ Adapter.reopen({
 
 App.ApplicationAdapter = Adapter;
 
+Ember.TextField.reopen({
+  attributeBindings: ["autofocus"]
+});
+
 import routes from 'appkit/routes';
 App.Router.map(routes); // TODO: just resolve the router
 
