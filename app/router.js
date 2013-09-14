@@ -1,5 +1,4 @@
-function Routes() {
-  // // routes/resources
+var router = Ember.Router.map(function(){
   this.resource('families', function() {
     this.route('new');
   });
@@ -11,6 +10,6 @@ function Routes() {
   this.resource('sittings', function() {
     this.route('new');
   });
-}
+});
 
-export default Routes;
+export default router;
