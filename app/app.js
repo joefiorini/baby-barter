@@ -1,6 +1,7 @@
 import Resolver from 'resolver';
 import Adapter from 'appkit/adapter';
 import SessionInit from 'appkit/initializers/session';
+import router from 'appkit/router';
 
 Ember.ENV.MODEL_FACTORY_INJECTIONS = true;
 
@@ -8,7 +9,11 @@ var App = Ember.Application.create({
   LOG_ACTIVE_GENERATION: true,
   LOG_VIEW_LOOKUPS: true,
   modulePrefix: 'appkit', // TODO: loaded via config
-  Resolver: Resolver
+  Resolver: Resolver,
+  Router: Ember.Router.extend({
+    router: router,
+    location: 'history'
+  })
 });
 
 Adapter.reopen({
@@ -20,11 +25,6 @@ App.ApplicationAdapter = Adapter;
 Ember.TextField.reopen({
   attributeBindings: ["autofocus"]
 });
-
-import routes from 'appkit/routes';
-App.Router.map(routes); // TODO: just resolve the router
-
-App.Router.reopen({ location: 'history' });
 
 
 App.initializer(SessionInit);
