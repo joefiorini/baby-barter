@@ -53,6 +53,7 @@ function authentication(req, res, next) {
   if(!req.header('content-type').match(/^application\/json/)) {
     return res.send(412);
   }
+
   var email, password;
 
   try {

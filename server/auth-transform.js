@@ -38,7 +38,7 @@ function checkUser(user, compareToken) {
   return new fortune.RSVP.Promise(function(resolve, reject) {
     if(!compareToken) return reject();
 
-    global.app.adapter.findMany('token', user.links.tokens).then(function(tokens) {;
+    global.app.adapter.findMany('token', user.links.tokens).then(function(tokens) {
 
       var tokenFound = false;
 
@@ -51,14 +51,15 @@ function checkUser(user, compareToken) {
 
       if(!tokenFound) reject("token not found");
 
+    }, function() {
+      console.log("d'oh");
     });
 
   });
 }
 
 // before storing in database
-function before(resolve, reject, request) {
-  checkToken.apply(this, arguments);
+function before(request) {
   var user = this
     , password = user.password
     , id = user.id || request.path.split('/').pop();
@@ -66,10 +67,12 @@ function before(resolve, reject, request) {
   // require a password on user creation
   if(request.method == 'POST') {
     if(!!password) {
-      return resolve(hashPassword(user, password));
+      return hashPassword(user, password);
     } else {
-      reject();
+      throw new Error("Authentication failed");
     }
+  } else {
+    return user;
   }
 
   function hashPassword(user, password) {
@@ -83,11 +86,11 @@ function before(resolve, reject, request) {
 }
 
 // after retrieving from database
-function after(resolve, reject, request) {
+function after(request) {
   var user = this;
   delete user.password;
   delete user.salt;
-  resolve(user);
+  return user;
 }
 
 module.exports = { before: before, after: after, checkToken: checkToken };
