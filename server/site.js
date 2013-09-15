@@ -2,6 +2,11 @@ var crypto = require('crypto');
 var auth = require("./auth-transform"),
     fortune = require("fortune");
 
+function printResource(request) {
+  console.log("resource for: ", request.path, this);
+  return this;
+}
+
 var app = fortune({
   db: "fortune-sandbox",
   adapter: "mongodb",
@@ -18,7 +23,7 @@ use(authentication).
 use(auth.checkToken).
 
 resource("family", {
-  display_name: String,
+  displayName: String,
   email: String,
   password: String,
   salt: Buffer,
@@ -26,8 +31,8 @@ resource("family", {
 }).transform(auth.before, auth.after).
 
 resource("sitting", {
-  started_at: Date,
-  ended_at: Date,
+  startedAt: Date,
+  endedAt: Date,
   requested_by: 'family',
   performed_by: 'family'
 }).
