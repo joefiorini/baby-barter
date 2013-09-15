@@ -14,3 +14,5 @@
 /connect.lock
 /libpeerconnection.log
 .DS_Store
+
+**/.tern-port
