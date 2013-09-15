@@ -109,7 +109,10 @@ module.exports = function(grunt) {
 
   grunt.registerTask('build:debug', "Build a development-friendly version of your app.", [
                      'build:before:debug',
-                     'concurrent:debug',
+                     'build:templates:debug', 
+                     'build:scripts', 
+                     'build:styles', 
+                     'build:other',
                      'build:after:debug'
                      ]);
 
