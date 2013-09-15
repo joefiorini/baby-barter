@@ -1,8 +1,8 @@
 var attr = DS.attr;
 
 var Sitting = DS.Model.extend({
-  startedAt: attr('date'),
-  endedAt: attr('date'),
+  startedAt: attr('moment'),
+  endedAt: attr('moment'),
   requestedBy: DS.belongsTo('family'),
   performedBy: DS.belongsTo('family')
 });
