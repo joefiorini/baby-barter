@@ -28,7 +28,7 @@ var NewController = Ember.ObjectController.extend({
   },
   performedOn: "2013 July, 10",
   startedAtTime: null,
-  finishedAtTime: null,
+  endedAtTime: null,
   performedOnDidChange: function() {
     var date = this.get("performedOn");
     setDateTimeProperty(this, "startedAt", date);
@@ -37,19 +37,19 @@ var NewController = Ember.ObjectController.extend({
   startedAtTimeDidChange: function() {
     var date = this.get("performedOn");
     setDateTimeProperty(this, "startedAt", date);
-    resolveDayBoundaryForTimeRange(this, date, "startedAt", "finishedAt");
+    resolveDayBoundaryForTimeRange(this, date, "startedAt", "endedAt");
   }.observes("startedAtTime"),
   finsihedAtTimeDidChange: function() {
     var date = this.get("performedOn");
-    setDateTimeProperty(this, "finishedAt", date);
-    resolveDayBoundaryForTimeRange(this, date, "startedAt", "finishedAt");
-  }.observes("finishedAtTime"),
+    setDateTimeProperty(this, "endedAt", date);
+    resolveDayBoundaryForTimeRange(this, date, "startedAt", "endedAt");
+  }.observes("endedAtTime"),
   startedAtDidChange: function() {
     console.log("startedAt: ", this.get("startedAt"));
   }.observes("startedAt"),
-  finishedAtDidChange: function() {
-    console.log("finishedAt: ", this.get("finishedAt"));
-  }.observes("finishedAt"),
+  endedAtDidChange: function() {
+    console.log("endedAt: ", this.get("endedAt"));
+  }.observes("endedAt"),
 });
 
 export default NewController;
