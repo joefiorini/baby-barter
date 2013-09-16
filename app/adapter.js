@@ -1,15 +1,12 @@
 var get = Ember.get;
-import JsonApiSerializer from 'appkit/serializer';
 
 var JsonApiAdapter = DS.RESTAdapter.extend({
 
-  serializer: JsonApiSerializer.create(),
-
   /**
-   * Underscore and pluralize the type name
+   * Pluralize the type name
    */
   rootForType: function(type) {
-    return Ember.String.pluralize(Ember.String.underscore(type));
+    return Ember.String.pluralize(type);
   },
 
   /**

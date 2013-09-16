@@ -19,14 +19,17 @@ var JsonApiSerializer = DS.RESTSerializer.extend({
     return this._super(store, primaryType, json, recordId, requestType);
   },
 
+  /**
+   * Flatten links
+   */
   normalize: function(type, hash, prop) {
     var json = {};
     for(var key in hash) {
       if(key != 'links') {
-        json[Ember.String.camelize(key)] = hash[key];
+        json[key] = hash[key];
       } else if(typeof hash[key] == 'object') {
         for(var link in hash[key]) {
-          json[Ember.String.camelize(link)] = hash[key][link];
+          json[key] = hash[key][link];
         }
       }
     }
