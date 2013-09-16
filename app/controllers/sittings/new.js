@@ -26,9 +26,14 @@ var NewController = Ember.ObjectController.extend({
       }).fail(Ember.RSVP.rethrow);
     }
   },
-  performedOn: "2013 July, 10",
   startedAtTime: null,
   endedAtTime: null,
+  contentDidChange: function() {
+    this.set("performedBy", this.get("currentUser.content"));
+  }.observes("content"),
+  requestedByDidChange: function() {
+    console.log("changed to:", this.get("requestedBy.email"));
+  }.observes("requestedBy"),
   performedOnDidChange: function() {
     var date = this.get("performedOn");
     setDateTimeProperty(this, "startedAt", date);

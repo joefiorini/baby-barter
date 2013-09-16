@@ -5,6 +5,7 @@
 <label>
   Requested By
 {{view Ember.Select contentBinding="families"
+       selectionBinding=requestedBy
        optionValuePath="content.id"
        optionLabelPath="content.displayName"}}
 </label>
