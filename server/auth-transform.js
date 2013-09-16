@@ -12,6 +12,7 @@ var pbkdf2 = {
 function checkToken(req, res, next) {
   // /families/new is the sign-up endpoint, so it should be public
   if(req.path.match(/families\/new/)) { return next(); }
+  if(req.path.match(/families/) && req.method == "POST") { return next(); }
   if(req.path.match(/sessions/)) { return next(); }
   if(req.get('X-Authorization') === undefined) { return res.send(401); }
   if(req.get('X-SignedInAs') === undefined) { return res.send(401); }

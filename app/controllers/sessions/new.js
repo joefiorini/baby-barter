@@ -22,9 +22,13 @@ var NewController = Ember.ObjectController.extend({
 
       this.setProperties({ hasError: false });
 
-      this.get("model").save().then(function(data) {
+      var complete =
+        this.get("model").save();
+
+      complete.then(function(data) {
+        self.target.send("userDidChange", data);
         self.transitionToRoute("families.index");
-      }).fail(function(error) {
+      }, function(error) {
         self.set("errorCode", error.status);
         Ember.RSVP.rethrow(error);
       });

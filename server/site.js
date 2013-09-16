@@ -82,14 +82,16 @@ function authentication(req, res, next) {
       }
     };
 
-    return app.adapter.create('token', token);
+    return app.adapter.create('token', token).then(function(token) {
+      return { token: token.value, user: user };
+    });
   }, function() {
     // fortune.RSVP.rethrow();
     return res.send(403);
   })
 
-  .then(function(token) {
-    res.send(200, token.value);
+  .then(function(result) {
+    res.send(200, result);
   }, function(e) {
     fortune.RSVP.rethrow(e);
     console.error("error authenticating user: ", e);

@@ -5,6 +5,9 @@ var ApplicationRoute = Ember.Route.extend({
         this.controllerFor("sessions/new").set("flash.denied", true);
         this.transitionTo("sessions.new");
       }
+    },
+    userDidChange: function(user) {
+      this.get("currentUser").set("content", user);
     }
   }
 });
