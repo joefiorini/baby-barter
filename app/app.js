@@ -1,5 +1,5 @@
 import Resolver from 'resolver';
-import Adapter from 'appkit/adapter';
+import Adapter from 'appkit/adapters/application';
 import SessionInit from 'appkit/initializers/session';
 import router from 'appkit/router';
 
@@ -19,8 +19,6 @@ var App = Ember.Application.create({
 Adapter.reopen({
   host: 'http://ember-dev-27896.use1.actionbox.io:3000'
 });
-
-App.ApplicationAdapter = Adapter;
 
 Ember.TextField.reopen({
   attributeBindings: ["autofocus"]

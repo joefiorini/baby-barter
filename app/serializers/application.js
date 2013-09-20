@@ -10,10 +10,10 @@ var JsonApiSerializer = DS.RESTSerializer.extend({
     var json = {};
     for(var key in payload) {
       var typeName = Ember.String.singularize(key);
-      if(typeName == primaryTypeName && Ember.isArray(payload[key])) {
+      if(typeName === primaryTypeName && Ember.isArray(payload[key])) {
         json[typeName] = payload[key][0];
       } else {
-        json[key] == payload[key];
+        json[key] = payload[key];
       }
     }
     return this._super(store, primaryType, json, recordId, requestType);
@@ -25,11 +25,11 @@ var JsonApiSerializer = DS.RESTSerializer.extend({
   normalize: function(type, hash, prop) {
     var json = {};
     for(var key in hash) {
-      if(key != 'links') {
+      if(key !== 'links') {
         json[key] = hash[key];
-      } else if(typeof hash[key] == 'object') {
+      } else if(typeof hash[key] === 'object') {
         for(var link in hash[key]) {
-          json[key] = hash[key][link];
+          json[link] = hash[key][link];
         }
       }
     }
@@ -43,10 +43,9 @@ var JsonApiSerializer = DS.RESTSerializer.extend({
    */
   serializeBelongsTo: function(record, json, relationship) {
     var key = relationship.key;
-
     var belongsTo = get(record, key);
 
-    if (isNone(belongsTo)) { return; }
+    if (isNone(belongsTo)) return;
 
     json.links = json.links || {};
     json.links[key] = get(belongsTo, 'id');

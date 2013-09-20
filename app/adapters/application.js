@@ -2,12 +2,7 @@ var get = Ember.get;
 
 var JsonApiAdapter = DS.RESTAdapter.extend({
 
-  /**
-   * Pluralize the type name
-   */
-  rootForType: function(type) {
-    return Ember.String.pluralize(type);
-  },
+  defaultSerializer: 'DS/jsonApi',
 
   /**
    * Fix query URL
@@ -18,11 +13,11 @@ var JsonApiAdapter = DS.RESTAdapter.extend({
 
   /**
    * Cast individual record to array,
-   * and pluralize the root key
+   * and match the root key to the route
    */
   createRecord: function(store, type, record) {
     var data = {};
-    data[Ember.String.pluralize(type.typeKey)] = [
+    data[this.pathForType(type.typeKey)] = [
       store.serializerFor(type.typeKey).serialize(record, {includeId: true})
     ];
 
@@ -31,11 +26,11 @@ var JsonApiAdapter = DS.RESTAdapter.extend({
 
   /**
    * Cast individual record to array,
-   * and pluralize the root key
+   * and match the root key to the route
    */
   updateRecord: function(store, type, record) {
     var data = {};
-    data[Ember.String.pluralize(type.typeKey)] = [
+    data[this.pathForType(type.typeKey)] = [
       store.serializerFor(type.typeKey).serialize(record)
     ];
 
