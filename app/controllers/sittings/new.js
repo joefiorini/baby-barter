@@ -28,6 +28,9 @@ var NewController = Ember.ObjectController.extend({
   },
   startedAtTime: null,
   endedAtTime: null,
+  familiesForSelect: function() {
+    return this.get("families").rejectBy("email", this.get("currentUser.email"));
+  }.property("families"),
   contentDidChange: function() {
     this.set("performedBy", this.get("currentUser.content"));
   }.observes("content"),
