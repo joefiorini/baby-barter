@@ -27,14 +27,15 @@ resource("family", {
   email: String,
   password: String,
   salt: Buffer,
-  tokens: ['token']
+  tokens: ['token'],
+  sittings: ['sitting']
 }).transform(auth.before, auth.after).
 
 resource("sitting", {
   startedAt: Date,
   endedAt: Date,
-  requested_by: 'family',
-  performed_by: 'family'
+  requestedBy: 'family',
+  performedBy: {ref: 'family', inverse: 'sittings'}
 }).
 
 resource("token", {

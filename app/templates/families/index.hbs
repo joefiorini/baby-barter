@@ -1,5 +1,22 @@
 {{#link-to "sittings.new"}}Add a Swap{{/link-to}}
 
-{{#each family in controller tagName="ul"}}
-  <li>{{family.displayName}}</li>
+<table>
+<thead>
+<tr>
+  <th>Started At</th>
+  <th>Ended At</th>
+  <th>Requested By</th>
+  <th>Performed By</th>
+</tr>
+</thead>
+<tbody>
+{{#each sitting in currentUser.sittings}}
+<tr>
+  <td>{{sitting.startedAt}}</td>
+  <td>{{sitting.endedAt}}</td>
+  <td>{{sitting.requestedBy.displayName}}</td>
+  <td>{{sitting.performedBy.displayName}}</td>
+</tr>
 {{/each}}
+</tbody>
+</table>
