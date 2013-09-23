@@ -63,9 +63,10 @@ function authentication(req, res, next) {
   var email, password;
 
   try {
-    email = req.body.email;
-    password = req.body.password;
+    email = req.body.sessions[0].email;
+    password = req.body.sessions[0].password;
   } catch(error) {
+    console.error("Bad request\n\tGot: ", req.body);
     return res.send(400);
   }
 
@@ -74,7 +75,10 @@ function authentication(req, res, next) {
       password, user.salt.buffer, pbkdf2.iterations, pbkdf2.keylen
     );
 
-    if(derivedKey != user.password) return res.send(401);
+    if(derivedKey != user.password) {
+      console.error("Invalid password for user:\n\t", JSON.stringify(user));
+      return res.send(401);
+    }
 
     var token = {
       value: crypto.randomBytes(Math.pow(2, 6)).toString('base64'),
@@ -84,10 +88,13 @@ function authentication(req, res, next) {
     };
 
     return app.adapter.create('token', token).then(function(token) {
-      return { token: token.value, user: user };
+      return { sessions: { id: token.id, token: token.value, email: user.email, user: user.id } };
     });
-  }, function() {
-    // fortune.RSVP.rethrow();
+  }, function(e) {
+    if(e) {
+      fortune.RSVP.rethrow(e);
+    }
+    console.error("Could not find family for email", email);
     return res.send(403);
   })
 

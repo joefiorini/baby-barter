@@ -2,7 +2,7 @@ import Session from 'appkit/models/session';
 
 var NewController = Ember.ObjectController.extend({
   init: function() {
-    this.set("newSession", Session.create({ container: this.container }));
+    this.set("newSession", this.store.createRecord("session"));
     this._super();
   },
   emailDidChange: function() {
