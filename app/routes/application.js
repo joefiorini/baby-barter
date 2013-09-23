@@ -8,6 +8,18 @@ var ApplicationRoute = Ember.Route.extend({
     },
     userDidChange: function(user) {
       this.get("currentUser").set("content", user);
+    },
+    signOut: function() {
+      var self = this;
+      this.store.find("session", "current").then(function(session) {
+        debugger;
+        session.deleteRecord();
+        session.save().then(function() {
+          self.transitionTo("sessions.new");
+        }, function(e) {
+          debugger;
+        });
+      });
     }
   }
 });

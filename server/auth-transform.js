@@ -14,6 +14,7 @@ function checkToken(req, res, next) {
   if(req.path.match(/families\/new/)) { return next(); }
   if(req.path.match(/families/) && req.method == "POST") { return next(); }
   if(req.path.match(/sessions/)) { return next(); }
+  if(req.path.match(/tokens/)) { return next(); }
   if(req.get('X-Authorization') === undefined) { return res.send(401); }
   if(req.get('X-SignedInAs') === undefined) { return res.send(401); }
 

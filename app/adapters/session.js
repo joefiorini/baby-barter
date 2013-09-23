@@ -1,6 +1,11 @@
 import Base from 'appkit/adapters/application';
 
 var Adapter = Base.extend({
+  deleteRecord: function(store, type, record) {
+    var id = record.get('id');
+
+    return this.ajax(this.buildURL("tokens", id), "DELETE");
+  },
   find: function(store, type, id) {
       if(id === "current") {
         return new Ember.RSVP.Promise(function(resolve, reject) {

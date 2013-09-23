@@ -9,6 +9,9 @@ var Session = DS.Model.extend({
     this.setHeaders();
     this.cacheCredentials();
   },
+  didDelete: function() {
+    window.localStorage.removeItem("session");
+  },
   setHeaders: function() {
     var adapter = this.store.adapterForType("family");
     adapter.headers = adapter.headers || {};
